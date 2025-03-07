@@ -14,6 +14,5 @@ namespace BAL.Interfaces
         void AddProject(ProjectDTO projectDTO);
         void DeleteProject(int id);
         void updateProject(ProjectDTO projectDTO);
-
     }
 }

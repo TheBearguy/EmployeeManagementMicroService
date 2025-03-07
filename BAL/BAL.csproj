@@ -16,8 +16,4 @@
     <ProjectReference Include="..\DomainModels\DomainModels.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>

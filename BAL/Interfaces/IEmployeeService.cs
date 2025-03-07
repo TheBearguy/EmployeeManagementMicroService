@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BAL.DTOs;
+
 namespace BAL.Interfaces
 {
-    interface IEmployeeService
+    public interface IEmployeeService
     {
         List<EmployeeDTO> GetAllEmployees();
         EmployeeDTO GetEmployeeById(int id);

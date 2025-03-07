@@ -81,12 +81,12 @@ namespace DAL.Repositories
             };
             _databaseHelper.ExecuteNonQuery(query, parameters);
         }
-        public void Delete(Project project)
+        public void Delete(int id)
         {
             var query = "EXEC ManageProjects 'DELETE', @Id";
             var parameters = new SqlParameter[]
             {
-                new SqlParameter("@Id", project.Id)
+                new SqlParameter("@Id", id)
             };
             _databaseHelper.ExecuteNonQuery(query, parameters);
         }

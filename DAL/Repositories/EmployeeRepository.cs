@@ -40,9 +40,13 @@ namespace DAL.Repositories
             }
             return employees;
         }
-        public Employee GetById()
+        public Employee GetById(int id)
         {
             var employee = new Employee();
+            var paramters = new SqlParameter[]
+            {
+                new SqlParameter("@Id", id)
+            };
             var query = "EXEC ManageEmployees 'SELECT', @Id";
             var reader = _databaseHelper.ExecuteReader(query);
             using (reader)
