@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using DAL.Database;
 using System.Data;
+using DAL.Interfaces;
 
 namespace DAL.Database
 {
-    class DatabaseHelper
+    public class DatabaseHelper : IDatabaseHelper
     {
         public readonly string _connectionString; 
         public DatabaseHelper(string connectionString)

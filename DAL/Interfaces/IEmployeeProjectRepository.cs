@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Interfaces
 {
-    interface IEmployeeProjectRepository
+    public interface IEmployeeProjectRepository
     {
         void AssignEmployeeToProject(int employeeId, int projectId);
         void RemoveEmployeeFromProject(int employeeId, int projectId);

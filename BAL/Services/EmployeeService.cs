@@ -10,7 +10,7 @@ using DomainModels;
 
 namespace BAL.Services
 {
-    class EmployeeService : IEmployeeService
+    public class EmployeeService : IEmployeeService
     {
         private readonly IEmployeeRepository _employeeRepository;
         public EmployeeService(IEmployeeRepository employeeRepository)

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using DomainModels; 
 using System.Data.SqlClient;
 using DAL.Database;
+using DAL.Interfaces;
 
 namespace DAL.Repositories
 {
-    class EmployeeProjectRepository
+    public class EmployeeProjectRepository : IEmployeeProjectRepository
     {
         private readonly DatabaseHelper _databaseHelper;
         public EmployeeProjectRepository(string connectionString)

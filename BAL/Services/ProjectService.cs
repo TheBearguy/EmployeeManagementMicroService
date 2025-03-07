@@ -15,7 +15,7 @@ using Microsoft.Identity.Client;
 
 namespace BAL.Services
 {
-    class ProjectService : IProjectService
+    public class ProjectService : IProjectService
     {
         private readonly IProjectRepository _projectRepository;
 

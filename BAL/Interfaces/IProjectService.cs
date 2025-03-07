@@ -13,6 +13,6 @@ namespace BAL.Interfaces
         ProjectDTO GetProjectById(int id);
         void AddProject(ProjectDTO projectDTO);
         void DeleteProject(int id);
-        void updateProject(ProjectDTO projectDTO);
+        void UpdateProject(int id);
     }
 }

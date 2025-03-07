@@ -12,7 +12,7 @@ namespace BAL.Interfaces
         List<EmployeeDTO> GetAllEmployees();
         EmployeeDTO GetEmployeeById(int id);
         void AddEmployee(EmployeeDTO employee);
-        void UpdateEmployee(EmployeeDTO employee);
+        void UpdateEmployee(int id);
         void DeleteEmployee(int id);
     }
 }

@@ -1,3 +1,9 @@
+using BAL.Interfaces;
+using DAL.Interfaces;
+using DAL.Repositories;
+using DAL.Database;
+using BAL.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,27 +14,16 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
+void ConfigureServices(IServiceCollection services)
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+    services.AddSingleton<IDatabaseHelper, DatabaseHelper>();
+    services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+    services.AddScoped<IProjectRepository, ProjectRepository>();
+    services.AddScoped<IEmployeeProjectRepository, EmployeeProjectRepository>();
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-});
+    services.AddScoped<IEmployeeService, EmployeeService>();
+    services.AddScoped<IProjectService, ProjectService>();
+    services.AddScoped<IEmployeeProjectService, EmployeeProjectService>();
 
-app.Run();
-
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    services.AddControllersWithViews();
 }

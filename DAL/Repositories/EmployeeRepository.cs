@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using DomainModels;
 using System.Data.SqlClient;
 using System.Data;
+using DAL.Interfaces;
 
 namespace DAL.Repositories
 {
-    class EmployeeRepository
+    public class EmployeeRepository : IEmployeeRepository
     {
         private readonly DatabaseHelper _databaseHelper;
         public EmployeeRepository(string connectionString)
