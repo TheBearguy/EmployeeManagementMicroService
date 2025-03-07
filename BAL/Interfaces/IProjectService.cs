@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BAL.Interfaces
 {
-    interface IProjectService
+    public interface IProjectService
     {
         List<ProjectDTO> GetAllProjects();
         ProjectDTO GetProjectById(int id);
