@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using DAL.Database;
+using System.Data;
 
 namespace DAL.Database
 {
@@ -48,3 +50,53 @@ namespace DAL.Database
         }
     }
 }
+
+
+//public DatabaseHelper()
+//{
+//    // Read the connection string from appsettings or config
+//    _connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+//}
+
+//// Execute stored procedures with parameters
+//public void ExecuteNonQuery(string storedProcedure, SqlParameter[] parameters)
+//{
+//    using (SqlConnection conn = new SqlConnection(_connectionString))
+//    {
+//        using (SqlCommand cmd = new SqlCommand(storedProcedure, conn))
+//        {
+//            cmd.CommandType = CommandType.StoredProcedure;
+//            if (parameters != null)
+//            {
+//                cmd.Parameters.AddRange(parameters);
+//            }
+
+//            conn.Open();
+//            cmd.ExecuteNonQuery();
+//        }
+//    }
+//}
+
+//// Retrieve data from the database
+//public DataTable ExecuteQuery(string storedProcedure, SqlParameter[] parameters = null)
+//{
+//    using (SqlConnection conn = new SqlConnection(_connectionString))
+//    {
+//        using (SqlCommand cmd = new SqlCommand(storedProcedure, conn))
+//        {
+//            cmd.CommandType = CommandType.StoredProcedure;
+//            if (parameters != null)
+//            {
+//                cmd.Parameters.AddRange(parameters);
+//            }
+
+//            using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+//            {
+//                DataTable dataTable = new DataTable();
+//                adapter.Fill(dataTable);
+//                return dataTable;
+//            }
+//        }
+//    }
+//}
+//}

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DomainModels;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace DAL.Repositories
 {
@@ -94,3 +95,32 @@ namespace DAL.Repositories
         }
     }
 }
+
+//public void AddEmployee(string name, string position, decimal salary)
+//{
+//    SqlParameter[] parameters = {
+//            new SqlParameter("@Name", name),
+//            new SqlParameter("@Position", position),
+//            new SqlParameter("@Salary", salary)
+//        };
+
+//    _dbHelper.ExecuteNonQuery("AddEmployee", parameters);
+//}
+
+//public List<Employee> GetEmployees()
+//{
+//    List<Employee> employees = new List<Employee>();
+//    DataTable dataTable = _dbHelper.ExecuteQuery("GetEmployees");
+
+//    foreach (DataRow row in dataTable.Rows)
+//    {
+//        employees.Add(new Employee
+//        {
+//            Id = Convert.ToInt32(row["Id"]),
+//            Name = row["Name"].ToString(),
+//            Position = row["Position"].ToString(),
+//            Salary = Convert.ToDecimal(row["Salary"])
+//        });
+//    }
+//    return employees;
+//}
