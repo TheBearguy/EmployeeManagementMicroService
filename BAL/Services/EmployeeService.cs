@@ -60,9 +60,9 @@ namespace BAL.Services
             });
         }
 
-        public void UpdateEmployee (int id)
+        public void UpdateEmployee (EmployeeDTO employee)
         {
-            _employeeRepository.Update(_employeeRepository.GetById(id));
+            _employeeRepository.Update(_employeeRepository.GetById(employee.Id));
         }
 
         public void DeleteEmployee(int id)
