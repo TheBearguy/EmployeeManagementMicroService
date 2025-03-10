@@ -71,9 +71,9 @@ namespace BAL.Services
             _projectRepository.Delete(id);
         }
 
-        public void UpdateProject(int id)
+        public void UpdateProject(ProjectDTO project)
         {
-            _projectRepository.Update(_projectRepository.GetById(id));
+            _projectRepository.Update(_projectRepository.GetById(project.Id));
         }
     }
 }
