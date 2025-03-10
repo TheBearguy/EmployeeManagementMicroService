@@ -7,15 +7,16 @@ using DomainModels;
 using System.Data.SqlClient;
 using DAL.Database;
 using DAL.Interfaces;
+using Microsoft.Extensions.Options;
 
 namespace DAL.Repositories
 {
     public class EmployeeProjectRepository : IEmployeeProjectRepository
     {
         private readonly DatabaseHelper _databaseHelper;
-        public EmployeeProjectRepository(string connectionString)
+        public EmployeeProjectRepository(IOptions<DatabaseSettings> dbSettings)
         {
-            _databaseHelper = new DatabaseHelper(connectionString);
+            _databaseHelper = new DatabaseHelper(dbSettings);
         }
 
         public void AssignEmployeeToProject(int employeeId, int projectId)

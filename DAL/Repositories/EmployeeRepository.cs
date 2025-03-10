@@ -8,15 +8,16 @@ using DomainModels;
 using System.Data.SqlClient;
 using System.Data;
 using DAL.Interfaces;
+using Microsoft.Extensions.Options;
 
 namespace DAL.Repositories
 {
     public class EmployeeRepository : IEmployeeRepository
     {
         private readonly DatabaseHelper _databaseHelper;
-        public EmployeeRepository(string connectionString)
+        public EmployeeRepository(IOptions<DatabaseSettings> dbSettings)
         {
-            _databaseHelper = new DatabaseHelper(connectionString);
+            _databaseHelper = new DatabaseHelper(dbSettings);
         }
         
         public List<Employee> GetAll()

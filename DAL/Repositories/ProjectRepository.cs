@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 using DomainModels;
 using System.Data.SqlClient;
 using DAL.Interfaces;
+using Microsoft.Extensions.Options;
 
 namespace DAL.Repositories
 {
     public class ProjectRepository : IProjectRepository
     {
         private readonly DatabaseHelper _databaseHelper;
-        public ProjectRepository (string connectionString)
+        public ProjectRepository(IOptions<DatabaseSettings> dbSettings)
         {
-            _databaseHelper = new DatabaseHelper(connectionString);
+            _databaseHelper = new DatabaseHelper(dbSettings);
         }
         public List<Project> GetAll()
         {
@@ -43,7 +44,11 @@ namespace DAL.Repositories
         {
             var project = new Project();
             var query = "EXEC ManageProjects 'SELECT', @Id";
-            var reader = _databaseHelper.ExecuteReader(query, new SqlParameter("@Id", id));
+            var parameters = new SqlParameter[]
+            {
+                    new SqlParameter("@Id", id)
+            };
+            var reader = _databaseHelper.ExecuteReader(query, parameters);
             using (reader)
             {
                 if (reader.Read())
@@ -64,9 +69,9 @@ namespace DAL.Repositories
             var query = "EXEC ManageProjects 'INSERT', @Name, @StartDate, @EndDate";
             var parameters = new SqlParameter[]
             {
-                new SqlParameter("@Name", project.Name),
-                new SqlParameter("@StartDate", project.StartDate),
-                new SqlParameter("@EndDate", project.EndDate)
+                    new SqlParameter("@Name", project.Name),
+                    new SqlParameter("@StartDate", project.StartDate),
+                    new SqlParameter("@EndDate", project.EndDate)
             };
             _databaseHelper.ExecuteNonQuery(query, parameters);
         }
@@ -75,10 +80,10 @@ namespace DAL.Repositories
             var query = "EXEC ManageProjects 'UPDATE', @Id, @Name, @StartDate, @EndDate";
             var parameters = new SqlParameter[]
             {
-                new SqlParameter("@Id", project.Id),
-                new SqlParameter("@Name", project.Name),
-                new SqlParameter("@StartDate", project.StartDate),
-                new SqlParameter("@EndDate", project.EndDate)
+                    new SqlParameter("@Id", project.Id),
+                    new SqlParameter("@Name", project.Name),
+                    new SqlParameter("@StartDate", project.StartDate),
+                    new SqlParameter("@EndDate", project.EndDate)
             };
             _databaseHelper.ExecuteNonQuery(query, parameters);
         }
@@ -86,7 +91,7 @@ namespace DAL.Repositories
         {
             var parameters = new SqlParameter[]
             {
-                new SqlParameter("@Id", id)
+                    new SqlParameter("@Id", id)
             };
             var query = "EXEC ManageProjects 'DELETE', @Id";
             _databaseHelper.ExecuteNonQuery(query, parameters);

@@ -7,15 +7,17 @@ using System.Data.SqlClient;
 using DAL.Database;
 using System.Data;
 using DAL.Interfaces;
+using System.Runtime.InteropServices.Marshalling;
+using Microsoft.Extensions.Options;
 
 namespace DAL.Database
 {
     public class DatabaseHelper : IDatabaseHelper
     {
         public readonly string _connectionString; 
-        public DatabaseHelper(string connectionString)
+        public DatabaseHelper(IOptions<DatabaseSettings> dbSettings)
         {
-            this._connectionString = connectionString; 
+            this._connectionString = dbSettings.Value.ConnectionString; 
         }
         public SqlConnection GetConnection()
         {
