@@ -7,13 +7,6 @@ using BAL.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-
-app.UseHttpsRedirection();
-
 void ConfigureServices(IServiceCollection services)
 {
     services.AddSingleton<IDatabaseHelper, DatabaseHelper>();
@@ -27,3 +20,19 @@ void ConfigureServices(IServiceCollection services)
 
     services.AddControllersWithViews();
 }
+
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();  // This step is optional, for generating Swagger JSON and UI.
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
