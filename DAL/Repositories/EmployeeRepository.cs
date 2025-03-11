@@ -23,7 +23,7 @@ namespace DAL.Repositories
         public List<Employee> GetAll()
         {
             var employees = new List<Employee>();
-            var query = "EXEC ManageEmployees 'SELECT'";
+            var query = "EXEC ManageEmployees 'SELECT', NULL, NULL, NULL";
             var reader = _databaseHelper.ExecuteReader(query);
             using (reader)
             {
@@ -42,15 +42,39 @@ namespace DAL.Repositories
             }
             return employees;
         }
+        //public Employee GetById(int id)
+        //{
+        //    var employee = new Employee();
+        //    var paramters = new SqlParameter[]
+        //    {
+        //        new SqlParameter("@Id", id)
+        //    };
+        //    var query = "EXEC ManageEmployees 'SELECT', @Id";
+        //    var reader = _databaseHelper.ExecuteReader(query);
+        //    using (reader)
+        //    {
+        //        if (reader.Read())
+        //        {
+        //            return new Employee
+        //            {
+        //                Id = (int)reader["Id"],
+        //                Name = reader["Name"].ToString(),
+        //                Position = reader["position"].ToString(),
+        //                Salary = Convert.ToDecimal(reader["Salary"])
+        //            };
+        //        }
+        //    }
+        //    return null;
+        //}
         public Employee GetById(int id)
         {
             var employee = new Employee();
-            var paramters = new SqlParameter[]
+            var parameters = new SqlParameter[]
             {
                 new SqlParameter("@Id", id)
             };
-            var query = "EXEC ManageEmployees 'SELECT', @Id";
-            var reader = _databaseHelper.ExecuteReader(query);
+            var query = "EXEC ManageEmployees 'SELECT', @Id, NULL, NULL";
+            var reader = _databaseHelper.ExecuteReader(query, parameters);
             using (reader)
             {
                 if (reader.Read())
@@ -67,17 +91,33 @@ namespace DAL.Repositories
             return null;
         }
 
+
+        //public void Insert(Employee employee)
+        //{
+        //    var query = "EXEC ManageEmployees 'INSERT', '@Name', '@Position', @Salary";
+        //    var parameters = new SqlParameter[]
+        //    {
+        //        new SqlParameter("@Name", employee.Name),
+        //        new SqlParameter("@Position", employee.Position),
+        //        new SqlParameter("@Salary", employee.Salary)
+        //    };
+        //    _databaseHelper.ExecuteNonQuery(query, parameters);
+        //}
+
         public void Insert(Employee employee)
         {
-            var query = "EXEC ManageEmployees 'INSERT', @Name, @Position, @Salary";
+            var query = "EXEC ManageEmployees @Action, @EmployeeId, @Name, @Position, @Salary";
             var parameters = new SqlParameter[]
             {
-                new SqlParameter("@Name", employee.Name),
-                new SqlParameter("@Position", employee.Position),
-                new SqlParameter("@Salary", employee.Salary)
+        new SqlParameter("@Action", "INSERT"),
+        new SqlParameter("@EmployeeId", DBNull.Value), // Omit for INSERT
+        new SqlParameter("@Name", employee.Name),
+        new SqlParameter("@Position", employee.Position),
+        new SqlParameter("@Salary", employee.Salary)
             };
             _databaseHelper.ExecuteNonQuery(query, parameters);
         }
+
         public void Update(Employee employee)
         {
             var query = "EXEC ManageEmployees 'UPDATE', @Id, @Name, @Position, @Salary";

@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using BAL.DTOs;
-using BAL.Services; 
+using BAL.Services;
+using BAL.Interfaces; 
 
 namespace EmployeeWebApp.Controllers
 {
@@ -9,8 +10,8 @@ namespace EmployeeWebApp.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private readonly EmployeeService _employeeService;
-        public EmployeesController(EmployeeService employeeService)
+        private readonly IEmployeeService _employeeService;
+        public EmployeesController(IEmployeeService employeeService)
         {
             _employeeService = employeeService;
         }

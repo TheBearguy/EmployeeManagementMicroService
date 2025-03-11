@@ -54,9 +54,9 @@ namespace BAL.Services
         {
             _employeeRepository.Insert(new Employee
             {
-                Id = employee.Id,
                 Name = employee.Name,
                 Position = employee.Position,
+                Salary = employee.Salary,
             });
         }
 

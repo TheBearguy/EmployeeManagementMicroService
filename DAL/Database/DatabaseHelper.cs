@@ -22,22 +22,37 @@ namespace DAL.Database
         public SqlConnection GetConnection()
         {
             return new SqlConnection(_connectionString); 
-        } 
-        
-        public int ExecuteNonQuery (string query, SqlParameter[] parameters = null)
+        }
+
+        //public int ExecuteNonQuery (string query, SqlParameter[] parameters = null)
+        //{
+        //    using (var connection = GetConnection() )
+        //    {
+        //        connection.Open();
+        //        using (var command = new SqlCommand())
+        //        {
+        //            if (parameters != null)
+        //            {
+        //                command.Parameters.AddRange(parameters);
+        //            }
+        //            return command.ExecuteNonQuery(); 
+        //        }
+        //    }   
+        //}
+        public int ExecuteNonQuery(string query, SqlParameter[] parameters = null)
         {
-            using (var connection = GetConnection() )
+            using (var connection = GetConnection())
             {
                 connection.Open();
-                using (var command = new SqlCommand())
+                using (var command = new SqlCommand(query, connection))
                 {
                     if (parameters != null)
                     {
                         command.Parameters.AddRange(parameters);
                     }
-                    return command.ExecuteNonQuery(); 
+                    return command.ExecuteNonQuery();
                 }
-            }   
+            }
         }
 
         public SqlDataReader ExecuteReader(string query, SqlParameter[] parameters = null )
