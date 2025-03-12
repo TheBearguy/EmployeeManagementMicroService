@@ -1,16 +1,17 @@
 ﻿using BAL.Services;
 using Microsoft.AspNetCore.Mvc;
 using BAL.DTOs;
-using BAL.Services; 
+using BAL.Services;
+using BAL.Interfaces; 
 
 namespace EmployeeWebApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProjectController : Controller
+    public class ProjectController : ControllerBase
     {
-        private readonly ProjectService _projectService;
-        public ProjectController(ProjectService projectService)
+        private readonly IProjectService _projectService;
+        public ProjectController(IProjectService projectService)
         {
             _projectService = projectService;
         }
@@ -40,7 +41,8 @@ namespace EmployeeWebApp.Controllers
             return CreatedAtAction(nameof(GetProject), new { id = projectDTO.Id }, projectDTO);
         }
 
-        [HttpPost]
+
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProject(int id, [FromBody] ProjectDTO projectDTO)
         {
             if (id != projectDTO.Id)
@@ -51,7 +53,7 @@ namespace EmployeeWebApp.Controllers
             return NoContent();
         }
 
-        [HttpPost]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProject(int id)
         {
             await Task.Run(() => _projectService.DeleteProject(id));

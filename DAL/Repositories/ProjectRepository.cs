@@ -66,12 +66,19 @@ namespace DAL.Repositories
         }
         public void Insert(Project project)
         {
-            var query = "EXEC ManageProjects 'INSERT', @Name, @StartDate, @EndDate";
+            if (project.StartDate < new DateTime(1753, 1, 1) || project.EndDate < new DateTime(1753, 1, 1))
+            {
+                    throw new ArgumentOutOfRangeException("Date values must be between 1/1/1753 and 12/31/9999.");
+            }
+
+            var query = "EXEC ManageProjects @Action, @Id, @Name, @StartDate, @EndDate";
             var parameters = new SqlParameter[]
             {
-                    new SqlParameter("@Name", project.Name),
-                    new SqlParameter("@StartDate", project.StartDate),
-                    new SqlParameter("@EndDate", project.EndDate)
+                new SqlParameter("@Action", "INSERT"),
+                new SqlParameter("@Id", DBNull.Value), // Omit for INSERT
+                new SqlParameter("@Name", project.Name),
+                new SqlParameter("@StartDate", project.StartDate),
+                new SqlParameter("@EndDate", project.EndDate)
             };
             _databaseHelper.ExecuteNonQuery(query, parameters);
         }

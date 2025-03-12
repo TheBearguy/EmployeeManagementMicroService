@@ -59,7 +59,6 @@ namespace BAL.Services
         {
             _projectRepository.Insert(new Project
             {
-                Id = project.Id,
                 Name = project.Name,
                 StartDate = project.StartDate,
                 EndDate = project.EndDate
